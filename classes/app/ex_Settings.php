@@ -14,8 +14,8 @@ class ex_Settings extends atsumi_AbstractAppSettings {
 			array(
 				'host'			=> 'localhost',
 				//'port'			=> 5432,
-				'dbname'		=> 'example',
-				'username'		=> 'jimmy',
+				'dbname'		=> 'atsumiexample',
+				'username'		=> 'atsumiexample',
 				'password'		=> 'password'
 			)
 		);

@@ -10,12 +10,12 @@ class ex_IndexController extends mvc_AbstractController {
 		
 		$index = array();
 		
-		$index['postgresql-database'] 		= $this->getExamples($spec['postgresql-database']);
-		$index['database'] 		= $this->getExamples($spec['database']);
-		$index['forms'] 		= $this->getExamples($spec['forms']);
-		$index['errors'] 		= $this->getExamples($spec['errors']);
-		$index['cron'] 			= $this->getExamples($spec['cron']);
-		$index['pagination'] 	= $this->getExamples($spec['pagination']);
+		$index['postgresql-database'] 	= $this->getExamples($spec['postgresql-database']);
+		$index['database'] 				= $this->getExamples($spec['database']);
+		$index['forms'] 				= $this->getExamples($spec['forms']);
+		$index['errors'] 				= $this->getExamples($spec['errors']);
+		$index['cron'] 					= $this->getExamples($spec['cron']);
+		$index['pagination'] 			= $this->getExamples($spec['pagination']);
 		// forms
 		
 			

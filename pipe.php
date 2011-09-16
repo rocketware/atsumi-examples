@@ -4,8 +4,8 @@ require_once("../atsumi/init.php");
 
 // Add class areas to the class loader
 atsumi_Loader::references(array(
-						'examples'	=> 'app examples mvc',
-						'atsumi' 	=> 'parser mvc widgets validators cache database'
+						'atsumi-examples'	=> 'app examples mvc',
+						'atsumi' 			=> 'caster mvc widgets validators cache database'
 					));
 
 

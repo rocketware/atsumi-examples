@@ -1,11 +1,11 @@
 <?php
 class ex_PgDatabaseExamplesController extends ex_AbstractExampleController {
 
-	/* Parser Examples */
-	function info_parser () {
+	/* caster Examples */
+	function info_caster () {
 		return 'Performs a simple select statement on the examples database, rendering the results';
 	}
-	function page_parser () {
+	function page_caster () {
 		$this->setView('ex_SimpleOutputView');
 
 		$testArr = array();
@@ -17,7 +17,7 @@ class ex_PgDatabaseExamplesController extends ex_AbstractExampleController {
 
 		foreach ($testArr as $idx => $test)
 				$testArr[$idx]['output'] = call_user_func_array(
-																		array('parser_PostgreSQL','parse'), 
+																		array('caster_PostgreSQL','cast'), 
 																		array_merge(
 																			array($testArr[$idx]['string']),
 																			$testArr[$idx]['args'] )
