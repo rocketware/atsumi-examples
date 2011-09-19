@@ -3,9 +3,7 @@ class ex_SimpleOutputView extends ex_AbstractExampleView {
 	
 	function renderBodyContent () {
 		
-		pfl('<pre>');
-		dump($this->get_output);
-		pfl('</pre>');
+		pfl('<pre>%s</pre>', stripslashes(pretty($this->get_output)));
 		
 	}
 	

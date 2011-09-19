@@ -22,7 +22,13 @@ abstract class ex_AbstractExampleView extends ex_AbstractHtmlView {
 	}
 	.example {
 		background-color:#eee;
-		padding:5em;
+		padding:10px;
+		border-radius:10px;
+	}
+	.example pre {
+		font-size:13px; overflow-x:auto; padding:20px; background-color:#f4f4f4;
+		margin:0;	
+		border:1px solid #e7e7e7;
 	}
 	</style>
 	<?php
