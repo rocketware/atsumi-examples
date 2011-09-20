@@ -46,24 +46,24 @@ class ex_Settings extends atsumi_AbstractAppSettings {
 	public function init_specification () {
 
 		return	array(
-			''				=> 'ex_IndexController',
-			'errors'		=> array (
-				'' 				=> 'ex_ErrorExamplesController'
+			''						=> 'ex_IndexController',
+			'errors'				=> array (
+				'' 					=> 'ex_ErrorExamplesController'
 			),
-			'forms'		=> array (
-				'' 				=> 'ex_FormExamplesController'
+			'forms'					=> array (
+				'' 					=> 'ex_FormExamplesController'
 			),
-			'pagination'		=> array (
-				'' 				=> 'ex_PaginationExamplesController'
+			'pagination'			=> array (
+				'' 					=> 'ex_PaginationExamplesController'
+			),	
+			'database-postgresql'	=> array (
+				'' 					=> 'ex_PgDatabaseExamplesController'
 			),
-			'postgresql-database'		=> array (
-				'' 				=> 'ex_PgDatabaseExamplesController'
+			'database-mysql'		=> array (
+				'' 					=> 'ex_MysqlDatabaseExamplesController'
 			),
-			'database'		=> array (
-				'' 				=> 'ex_DatabaseExamplesController'
-			),
-			'cron'			=> array (
-				''				=> 'ex_CronExamplesController'
+			'cron'					=> array (
+				''					=> 'ex_CronExamplesController'
 				)
 
 		); 

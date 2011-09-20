@@ -73,13 +73,14 @@ class ex_PgDatabaseExamplesController extends ex_AbstractExampleController {
 			'last_seen = NOW()',
 			'last_name = %s', 'Forrester'
 		);
-		
 		$queries['INSERT'] = $db->parseInsertQuery (
 			'person', 
 			'first_name = %s', 'James',
 			'last_seen = NOW()',
 			'last_name = %s', 'Forrester'
 		);
+
+
 
 		
 		$this->set('output', $queries);
@@ -89,10 +90,10 @@ class ex_PgDatabaseExamplesController extends ex_AbstractExampleController {
 
 
 	/* Simple query */
-	function info_simple_query () {
+	function info_query () {
 		return 'Performs a simple select statement on the examples database, rendering the results';
 	}
-	function page_simple_query () {
+	function page_query () {
 		$this->setView('ex_SimpleOutputView');
 
 		$db = $this->app->init_postgres;
@@ -108,12 +109,11 @@ class ex_PgDatabaseExamplesController extends ex_AbstractExampleController {
 		$this->set('output', array('result:' => $rows, 'persons'=>$persons));
 	}
 
-
-	/* Simple select */
-	function info_simple_fetch () {
+	/* Simple fetch */
+	function info_fetch () {
 		return 'Performs a fetch select statement on the examples database, rendering the results';
 	}
-	function page_simple_fetch () {
+	function page_fetch () {
 		$this->setView('ex_SimpleOutputView');
 
 		$db = $this->app->init_postgres;
@@ -125,12 +125,11 @@ class ex_PgDatabaseExamplesController extends ex_AbstractExampleController {
 		$this->set('output', $select);
 	}
 
-
 	/* Simple update */
-	function info_simple_update () {
+	function info_update () {
 		return 'Performs a simple update statement on the examples database, rendering the results';
 	}
-	function page_simple_update () {
+	function page_update () {
 		$this->setView('ex_SimpleOutputView');
 
 		$db = $this->app->init_postgres;
@@ -147,10 +146,10 @@ class ex_PgDatabaseExamplesController extends ex_AbstractExampleController {
 
 
 	/* Simple insert */
-	function info_simple_insert () {
+	function info_insert () {
 		return 'Performs a simple insert statement on the examples database, rendering the results';
 	}
-	function page_simple_insert () {
+	function page_insert () {
 		$this->setView('ex_SimpleOutputView');
 
 		$db = $this->app->init_postgres;
@@ -164,67 +163,112 @@ class ex_PgDatabaseExamplesController extends ex_AbstractExampleController {
 		$this->set('output', $result);
 	}
 
+	/* Simple insert or update */
+	function info_insertOrUpdateOne () {
+		return 'Performs a simple insert or update one statement on the examples database, rendering the results';
+	}
+	function page_insertOrUpdateOne () {
+		$this->setView('ex_SimpleOutputView');
+
+		$db = $this->app->init_postgres;
+
+
+		$result = $db->insertOrUpdateOne (
+								'person', 
+								'first_name = %s', 'Bobby',
+								'last_seen = NOW()');
+		
+		$this->set('output', $result);
+	}
+
 	/* Simple select one */
-	function info_simple_select_one() {
+	function info_selectOne() {
 		return 'Performs a simple select one statement on the examples database, rendering the results';
 	}
-	function page_simple_select_one() {
+	function page_selectOne() {
 		$this->setView('ex_SimpleOutputView');
 
 		$db = $this->app->init_postgres;
 
-		$select = $db->selectOne('*', 'person', 'id = %i', 1);
+		$select = $db->selectOne(
+						'select * from %@ where last_seen > now () - %z limit 1', 
+						'person', '12 hours'
+					);
 
 		$this->set('output', $select);
 	}
 
 	/* Simple select */
-	function info_simple_fetch_one() {
+	function info_fetchOne() {
 		return 'Performs a simple select one statement on the examples database, rendering the results';
 	}
-	function page_simple_fetch_one() {
+	function page_fetchOne() {
 		$this->setView('ex_SimpleOutputView');
 
 		$db = $this->app->init_postgres;
 
-		$select = $db->fetchOne('person', 'alias = %s', 'jimmysparkle');
+		$select = $db->fetchOne(
+					'first_name, last_name', 
+					'person', 
+					'alias = %s', 'jimmysparkle'
+				);
 
 		$this->set('output', $select);
 	}
 
-	/* Simple select */
-	function info_simple_exists() {
+	/* Simple exists */
+	function info_exists() {
 		return 'Performs a simple exists statement on the examples database, rendering the results';
 	}
-	function page_simple_exists() {
+	function page_exists() {
 		$this->setView('ex_SimpleOutputView');
 
 		$db = $this->app->init_postgres;
 
 		$select = array();
-		$select[] = $db->exists('people');
-		$select[] = $db->exists('people', 'last_name = %s', 'Forrester');
-		$select[] = $db->exists('people', 'first_name = %s AND last_name = %s', 'Jimmy', 'Forrester-Fellowes');
-		$select[] = $db->exists('people', 'first_name = %s AND last_name = %s', 'Bobby', 'Forrester');
+		$select[] = $db->exists('person', 'last_name = %s', 'Forrester');
+		$select[] = $db->exists('person', 'first_name = %s AND last_name = %s', 'Jimmy', 'Forrester-Fellowes');
+		$select[] = $db->exists('person', 'first_name = %s AND last_name = %s', 'Bobby', 'Forrester');
 
 		$this->set('output', $select);
 	}
 
 	/* Simple select */
-	function info_simple_count() {
+	function info_count() {
 		return 'Performs a simple count statement on the examples database, rendering the results';
 	}
-	function page_simple_count() {
+	function page_count() {
 		$this->setView('ex_SimpleOutputView');
 
 		$db = $this->app->init_postgres;
 
 		$select = array();
-		$select[] = $db->count('people');
-		$select[] = $db->count('people', 'last_name = %s', 'Forrester');
-		$select[] = $db->count('people', 'first_name = %s AND last_name = %s', 'Jimmy', 'Forrester');
+		$select[] = $db->count('person');
+		$select[] = $db->count('person', 'last_name = %s', 'Forrester');
+		$select[] = $db->count('person', 'first_name = %s AND last_name = %s', 'Jimmy', 'Forrester');
 
 		$this->set('output', $select);
+	}
+
+	/* Simple select */
+	function info_transaction() {
+		return 'Performs a query in a transaction then rolls back';
+	}
+	function page_transaction() {
+		$this->setView('ex_SimpleOutputView');
+
+		$db = $this->app->init_postgres;
+		
+		$db->transactionBegin();
+		$result = $db->update (
+								'person', 
+								'last_seen > now () - %z', '1 week',
+								'last_seen = NOW()');
+								
+		$affectedRows = $db->getAffectedRows();	
+		$db->transactionAutoRollback();				
+		
+		$this->set('output', sf('Transaction rolled back (would have affected %s rows)', $affectedRows));
 	}
 }
 
