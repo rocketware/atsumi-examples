@@ -103,7 +103,11 @@ class ex_PgDatabaseExamplesController extends ex_AbstractExampleController {
 		
 		$persons = array();
 		foreach ($rows as $row) {
-			$persons[] = sf('name: %s', $row->cast('S', 'alias'));
+			$persons[] = sf('name: %s dob: %s', 
+								$row->cast('S', 'alias'), 
+								$row->cast('D', 'dob')==null?
+									'Unknown':$row->cast('D', 'dob')
+							);
 		}
 		
 		$this->set('output', array('result:' => $rows, 'persons'=>$persons));
