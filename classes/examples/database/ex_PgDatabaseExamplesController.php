@@ -17,7 +17,7 @@ class ex_PgDatabaseExamplesController extends ex_AbstractExampleController {
 
 		foreach ($testArr as $idx => $test)
 			$testArr[$idx]['output'] = call_user_func_array(
-											array('caster_PostgreSQL','cast'), 
+											array('caster_PostgreSql','cast'), 
 											array_merge(
 												array($testArr[$idx]['string']),
 												$testArr[$idx]['args'] )
